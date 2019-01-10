@@ -2,9 +2,7 @@
 #include <Servo.h>
 
 Servo myservo;  // create servo object to control a servo
-// twelve servo objects can be created on most boards
-
-int pos = 1650;    // variable to store the servo position
+int pos = 1650;    // variable to store the servo signal
 int ad=1650;
 int flag=1;
 
@@ -15,14 +13,14 @@ void setup() {
 }
 
 void loop() {
-  if(Serial.available()>1){
+  if(Serial.available()>1){// get the signal from matlab
    ad=Serial.parseInt();
     myservo.writeMicroseconds(ad);   
-    
+    //real();
   }
   
 }
-void real(){
+void real(){//in case that servo motors movements are agresive use the void
   
   if(ad>pos){
     while(pos<=ad) {
