@@ -1,13 +1,12 @@
 try
+%setup from a clean start
 clear all
 vid = videoinput('winvideo', 1);
 
 %opcion dicides (1) for PID (2) for LQR
-
 opcion=1;
 
 %constant for PID an LQR
-
 Setpoint=30;
 kp=-133.8;%-8.512;-2.848;
 ki=-30.98;%-0.9695;%-0.1659;
@@ -99,10 +98,9 @@ while(1)
         set(a, 'FontName', 'Arial', 'FontWeight', 'bold', 'FontSize', 12, 'Color', 'blue');
        
        bbbb = statsss(1).BoundingBox;
-       %bbbb(3)
+       %make a scale from pixel to centimeters
        tri=(4.08/bb(3));
-       
-    
+      
         bccc = statsss(1).Centroid;
         rectangle('Position',bbbb,'EdgeColor','b','LineWidth',2)
         plot(bccc(1),bccc(2), '-m+')
@@ -113,13 +111,10 @@ while(1)
     catch exception
     end
     
-    
-    %diametro 4.08
-       % fprintf(arduino,'%s',1); 
      x1=(bccc(2)-bc(2));
      y1=abs(bccc(1)-bc(1));
-    distancia=round((sqrt(abs((x1*x1)+(y1*y1)))*tri)-3);
-      angle=(atan(x1/y1))*180/3.1416;
+    distancia=round((sqrt(abs((x1*x1)+(y1*y1)))*tri)-3);%calculate distance betwen color blue and red
+    angle=(atan(x1/y1))*180/3.1416;
     tag(flag)=distancia;
     tag2(flag)=angle;
     plot(tag)
