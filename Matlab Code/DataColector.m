@@ -1,12 +1,6 @@
-%a = imaqhwinfo;
-%[camera_name, camera_id, format] = getCameraInfo(a);
-
 try
-   clear all
-    vid = videoinput('winvideo', 1);
-
-
-
+  clear all
+  vid = videoinput('winvideo', 1);
 % Set the properties of the video object
 set(vid, 'FramesPerTrigger', Inf);
 set(vid, 'ReturnedColorspace', 'rgb')
@@ -14,14 +8,14 @@ vid.FrameGrabInterval = 4;
 arduino = serial('COM4','BaudRate',9600); % Set ComPort
 fopen(arduino);
 pause(2.0)
-
+%create a cell to save data
 nd=3000;
 datosx=cell2mat(cell(nd,1));
 datosy=cell2mat(cell(nd,1));
 %start the video aquisition here
 start(vid)
 flag=1;
-u = idinput(nd,'prbs',[0,1],[1200,2000]);
+u = idinput(nd,'prbs',[0,1],[1200,2000]);%set a random signal for servo motor
 % Set a loop that stop after 100 frames of aquisition
 while(flag <=nd)
     
